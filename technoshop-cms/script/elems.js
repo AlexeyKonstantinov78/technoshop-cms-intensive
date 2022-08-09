@@ -1,5 +1,14 @@
 'use strict';
 
-export const modalBtn = document.querySelector('.modal-open-btn');
-export const modal = document.querySelector('.modal');
+const modalBtn = document.querySelector('.modal-open-btn');
+const modal = document.querySelector('.modal');
+const form = document.querySelector('.modal-content');
+const preview = document.querySelector('.preview');
 
+
+export {
+    modalBtn,
+    modal,
+    form,
+    preview
+}

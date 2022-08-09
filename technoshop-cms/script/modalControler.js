@@ -1,11 +1,21 @@
 'use strict';
 
+import { hidePreview } from './previewController.js';
+import { form } from './elems.js';
+
 const openModal = (modal, classOpen) => {
     modal.classList.add(classOpen);
 };
 
 const closeModal = (modal, classOpen) => {
     modal.classList.remove(classOpen);
+    hidePreview();
+    form.title.value = '';
+    form.category.value = '';
+    form.description.value = '';
+    form.display.value = '';
+    form.price.value = '';
+        
 };
 
 export const modalController = ({modal, modalBtn, classOpen, classClose}) => {  
