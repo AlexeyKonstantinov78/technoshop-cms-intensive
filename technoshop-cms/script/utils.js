@@ -1,6 +1,14 @@
 'use strict';
 
-export const toBase64 = (file) => {
+const currencyFormatRUB = (n) => {
+  return new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency: 'RUB',
+    maximumFractionDigits: 0
+  }).format(n);
+};
+
+const toBase64 = (file) => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.addEventListener('loadend', () => {
@@ -14,3 +22,8 @@ export const toBase64 = (file) => {
         reader.readAsDataURL(file);
     });
 };
+
+export {
+  toBase64,
+  currencyFormatRUB
+}
