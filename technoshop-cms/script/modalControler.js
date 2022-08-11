@@ -9,13 +9,8 @@ const openModal = (modal, classOpen) => {
 
 const closeModal = (modal, classOpen) => {
     modal.classList.remove(classOpen);
+    form.reset();
     hidePreview();
-    form.title.value = '';
-    form.category.value = '';
-    form.description.value = '';
-    form.display.value = '';
-    form.price.value = '';
-        
 };
 
 export const modalController = ({modal, modalBtn, classOpen, classClose}) => {  
