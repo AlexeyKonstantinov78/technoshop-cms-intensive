@@ -1,7 +1,8 @@
 'use strict';
 
-import { category } from "./elems.js";
-import { getCategory } from "./serbiceAPI.js";
+import { category, form } from "./elems.js";
+import { getCategory, postGoods } from "./serbiceAPI.js";
+import { toBase64 } from './utils.js';
 
 
 const updateCategory = async () => {
@@ -16,6 +17,28 @@ const updateCategory = async () => {
 };
 
 export const formControllers = () => {
-
   updateCategory();
-}
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    
+    const data = {};
+
+    for (const [key, val] of formData) {
+      if(val) {
+        data[key] = val;
+      }      
+    }
+
+    if (data.image.size) {
+      data.image = await toBase64(data.image);
+    } else {
+      delete data.image;
+    }
+
+    const goods = await postGoods(data);
+    console.log(goods);
+  }); 
+};
