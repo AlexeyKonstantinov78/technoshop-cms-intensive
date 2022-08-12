@@ -3,9 +3,8 @@
 import { tableGoods } from './elems.js';
 import { currencyFormatRUB } from './utils.js';
 
-const renderRow = ({id, title, category, price}) => {        
-  tableGoods.insertAdjacentHTML('beforeend', `
-    <tr class="table-row table-goods-item" data-id="${id}">
+const fillingRow = (goodsRow, {id, title, category, price}) => {
+  goodsRow.innerHTML = `    
       <td>${id}</td>
       <td>${title}</td>
       <td>${category}</td>
@@ -16,12 +15,25 @@ const renderRow = ({id, title, category, price}) => {
           <use xlink:href="#delete" />
           </svg>
       </button>
-      </td>
-    </tr>
-  `);       
+      </td>    
+  `;
+  return goodsRow;
 };
 
- const tableRender = (goods) => {
+const renderRow = (data) => {        
+  const goodsRow = document.createElement('tr');
+  goodsRow.classList.add('table-row', 'table-goods-item');
+  goodsRow.dataset.id = data.id;
+
+  tableGoods.append(fillingRow(goodsRow, data));
+};
+
+const editRow = (data) => {
+  const goodsRow = document.querySelector(`[data-id="${data.id}"]`);
+  fillingRow(goodsRow, data);
+};
+
+const tableRender = (goods) => {
         
     tableGoods.textContent = '';
 
@@ -30,5 +42,6 @@ const renderRow = ({id, title, category, price}) => {
 
 export {
   tableRender,
-  renderRow
+  renderRow,
+  editRow
 }

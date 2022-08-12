@@ -3,8 +3,8 @@
 import { category, form, modal } from "./elems.js";
 import { closeModal } from "./modalControler.js";
 import { showPreview } from "./previewController.js";
-import { getCategory, getGoods, postGoods } from "./serbiceAPI.js";
-import { renderRow } from "./tableViewer.js";
+import { editGoods, getCategory, getGoods, postGoods } from "./serbiceAPI.js";
+import { renderRow, editRow } from "./tableViewer.js";
 import { toBase64 } from './utils.js';
 import { API_URI } from "./const.js";
 
@@ -42,8 +42,14 @@ const formControllers = () => {
       delete data.image;
     }
 
-    const goods = await postGoods(data);
-    renderRow(goods);
+    if (data.imagesave) {
+      const goods = await editGoods(data);
+      editRow(goods);
+    } else {
+      const goods = await postGoods(data);
+      renderRow(goods);
+    }
+    
     updateCategory();
     closeModal(modal, 'd-block');
     
@@ -59,7 +65,8 @@ const fillingForm = async (id) => {
   form.display.value = display;
   form.price.value = price;
   form.imagesave.value = image;
-  showPreview(`${API_URI}${image}`);
+  form.identificator.value = id
+  showPreview(`${API_URI}${image}`);  
 };
 
 export {
