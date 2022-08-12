@@ -1,8 +1,12 @@
 'use strict';
 
-import { category, form } from "./elems.js";
-import { getCategory, postGoods } from "./serbiceAPI.js";
+import { category, form, modal } from "./elems.js";
+import { closeModal } from "./modalControler.js";
+import { showPreview } from "./previewController.js";
+import { getCategory, getGoods, postGoods } from "./serbiceAPI.js";
+import { renderRow } from "./tableViewer.js";
 import { toBase64 } from './utils.js';
+import { API_URI } from "./const.js";
 
 
 const updateCategory = async () => {
@@ -16,7 +20,7 @@ const updateCategory = async () => {
   category.append(...categoryOption);
 };
 
-export const formControllers = () => {
+const formControllers = () => {
   updateCategory();
 
   form.addEventListener('submit', async (event) => {
@@ -39,6 +43,26 @@ export const formControllers = () => {
     }
 
     const goods = await postGoods(data);
-    console.log(goods);
+    renderRow(goods);
+    updateCategory();
+    closeModal(modal, 'd-block');
+    
   }); 
+};
+
+const fillingForm = async (id) => {
+  const {title, category, description, display, price, image} = await getGoods(id);
+  
+  form.title.value = title;
+  form.category.value = category;
+  form.description.value = description.join('\n');
+  form.display.value = display;
+  form.price.value = price;
+  form.imagesave.value = image;
+  showPreview(`${API_URI}${image}`);
+};
+
+export {
+  formControllers,
+  fillingForm
 };

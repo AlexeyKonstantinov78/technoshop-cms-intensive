@@ -21,9 +21,14 @@ const renderRow = ({id, title, category, price}) => {
   `);       
 };
 
-export const tableRender = (goods) => {
+ const tableRender = (goods) => {
         
     tableGoods.textContent = '';
 
     goods.forEach(renderRow);
+}
+
+export {
+  tableRender,
+  renderRow
 }

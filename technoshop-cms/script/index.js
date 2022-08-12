@@ -7,12 +7,9 @@ import { previewControler } from './previewController.js';
 import { tableController } from './tableController.js';
 
 const init= () => {
-    modalController({
-        modal, 
-        modalBtn, 
-        classOpen: 'd-block',
-        classClose: 'btn-close'
-    })
+    modalController({        
+        modalBtn,         
+    });
     
     previewControler();
     tableController();

@@ -7,7 +7,8 @@ const preview = document.querySelector('.preview');
 const image = document.querySelector('#image');
 const tableGoods = document.querySelector('.table-goods');
 const category = document.querySelector('#category');
-
+const modalTitle = document.querySelector('.modal-title');
+const modalSubmitBtn = document.querySelector('.modal-submit-btn');
 
 export {
     modalBtn,
@@ -16,5 +17,7 @@ export {
     preview,
     image,
     tableGoods,
-    category
+    category,
+    modalTitle,
+    modalSubmitBtn
 }

@@ -2,11 +2,11 @@
 
 import { API_URI } from './const.js';
 
-const getGoods = async () => {
+const getGoods = async (id) => {
     // return await fetch(`${API_URI}goods/?nopage=true`)
     //     .then(response => response.json());
 
-    const response = await fetch(`${API_URI}goods/?nopage=true`);
+    const response = await fetch(`${API_URI}api/goods/${id ? id: '?nopage=true'}`);
 
     if (response.ok) {
         return response.json();
@@ -16,7 +16,7 @@ const getGoods = async () => {
 };
 
 const getCategory = async () => {
-    const response = await fetch(`${API_URI}category`);
+    const response = await fetch(`${API_URI}api/category`);
 
     if (response.ok) {
         return response.json();
@@ -27,7 +27,7 @@ const getCategory = async () => {
 
 const postGoods = async (data) => {
     
-    const response = await fetch(`${API_URI}goods`, {
+    const response = await fetch(`${API_URI}api/goods`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
