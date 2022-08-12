@@ -9,6 +9,7 @@ const tableGoods = document.querySelector('.table-goods');
 const category = document.querySelector('#category');
 const modalTitle = document.querySelector('.modal-title');
 const modalSubmitBtn = document.querySelector('.modal-submit-btn');
+const wrapperSort = document.querySelector('.wrapper-sort');
 
 export {
     modalBtn,
@@ -19,5 +20,6 @@ export {
     tableGoods,
     category,
     modalTitle,
-    modalSubmitBtn
+    modalSubmitBtn,
+    wrapperSort
 }
